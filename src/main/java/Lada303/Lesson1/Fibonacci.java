@@ -1,5 +1,7 @@
 package Lada303.Lesson1;
 
+import java.math.BigInteger;
+
 public class Fibonacci {
 
     public long fibRecursive(int n) {
@@ -18,19 +20,23 @@ public class Fibonacci {
         fib[1] = 1;
         for (int i = 2; i <= n; i++) {
             fib[i] = fib[i - 1] + fib[i - 2];
+            if (fib[i] < 0) {
+                System.out.println("Переполнение long");
+                return -1;
+            }
         }
         return fib[n];
     }
 
-    public long fibUnmemorized(int n) {
+    public BigInteger fibUnmemorized(int n) {
         if (n <= 1) {
-            return n;
+            return BigInteger.valueOf(n);
         }
-        long n_2 = 0;
-        long n_1 = 1;
-        long fib = 0;
+        BigInteger n_2 = BigInteger.ZERO;
+        BigInteger n_1 = BigInteger.ONE;
+        BigInteger fib = BigInteger.ZERO;
         for (int i = 2; i <= n; i++) {
-            fib = n_1 + n_2;
+            fib = n_1.add(n_2);
             n_2 = n_1;
             n_1 = fib;
         }
